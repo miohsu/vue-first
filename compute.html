@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/demo.css">
+
+</head>
+<body>
+<div id="app">
+    <p>Original message: {{ message }}</p>
+    <p>Computed reversed message: {{ reverseMessage }}</p>
+    <p>Reversed message: {{ reverseMsg() }}</p>
+    <p>Time: {{ now }}</p>
+
+    <p>firstname: {{ firstName }}</p>
+    <p>lastname: {{ lastName }}</p>
+    <p>fullname: {{ fullName }}</p>
+
+
+</div>
+<script src="js/vue.min.js"></script>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello',
+            firstName: 'Mio',
+            lastName: 'Hsu',
+
+        },
+
+        computed: {
+            reverseMessage () {
+                return this.message.split('').reverse().join('')
+            },
+            now (){
+                return Date.now()
+            },
+            fullName: {
+                get () {
+                    return this.firstName + ' ' + this.lastName
+                },
+                set (newname){
+                    var names = newname.split(' ')
+                    this.firstName = names[0]
+                    this.lastName = names[names.length - 1]
+                }
+            } ,
+        },
+        methods: {
+            reverseMsg (){
+                return this.message.split('').reverse().join('')
+            },
+        },
+    })
+</script>
+
+</body>
+</html>

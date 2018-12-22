@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+<div id="event">
+    <button @click="counter += 1">Add 1</button>
+    <p>The button above has been clicked {{ counter }} times.</p>
+    <p>==============================</p>
+    <button @click="greet">Greet</button>
+    <button @click="say('hi')">Say hi</button>
+    <button @click="say('what')">Say what</button>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#event',
+        data: {
+            counter: 0,
+            name: 'Vue.js',
+        },
+        methods: {
+            greet (){
+                alert("Hello "+this.name+"!")
+            },
+            say (msg){
+                alert(msg)
+            }
+        }
+    })
+</script>
+</body>
+</html>

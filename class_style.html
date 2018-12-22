@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1 :class="{ active:isActive, 'text-danger':hasError }">Hello</h1>
+    <h1 :class="classObject">World!</h1>
+    <h1 :class="classCompute">classCompute</h1>
+    <my-component :class="{ active: isActive }"></my-component>
+    <p :style="styleObject">styleObject</p>
+</div>
+
+<script>
+    Vue.component('my-component',{
+        template: '<p class="foo bar">Hi</p>'
+    })
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            isActive: true,
+            hasError: true,
+            error: null,
+            classObject: {
+                active: true,
+                'text-danger': false
+            },
+            styleObject: {
+                color: 'red',
+                fontSize: '15px'
+            },
+        },
+        computed: {
+            classCompute (){
+                return {
+                    active: this.isActive && !this.error,
+                    'text-danger': this.error && this.error.type === 'fatal'
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

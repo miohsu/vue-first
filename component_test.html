@@ -11,20 +11,80 @@
     <button-counter></button-counter>
     <button-counter></button-counter>
     <button-counter></button-counter>
+    <br>
+    <child message="hello!"></child>
+    <br>
+    <div :style="{ fontSize: postFontSize + 'em' }">
+        <blog-post @enlarge-text="onEnglargeText" v-for="post in posts" :post="post" :key="post.id"></blog-post>
+
+    </div>
+    <div>
+        <alert-box>
+            some thing is wrong!
+        </alert-box>
+    </div>
 </div>
 
 <script>
     Vue.component('button-counter',{
+        template: '<button @click="count++">You clicked me {{ count }} times.</button>',
         data: function () {
             return {
                 count: 0
             }
         },
-        template: '<button @click="count++">You clicked me {{ count }} times.</button>'
     })
 
+    Vue.component('blog-post',{
+        props: ['post'],
+        template: `
+            <div>
+                <h3>{{ post.title }}</h3>
+                <button @click="$emit('enlarge-text',0.1)">
+                    Enlarge text
+                </button>
+                <h3>{{ post.id }}</h3>
+                <h3>{{ post.content }}</h3>
+                <br>
+            </div>
+        `
+    })
+    var child = {
+        props: ['message'],
+        template: '<h1>{{message}}</h1>'
+    }
+    Vue.component('child',child)
+
+    Vue.component('alert-box',{
+        template: `
+            <div>
+                <strong>Error!</strong>
+                <slot></slot>
+            </div>
+        `
+    })
     new Vue({
-        el: '#app'
+        el: '#app',
+        data: {
+            posts: [
+                {
+                    title: 'My journey with Vue',
+                    content: 'content',
+                    id: 1
+                },
+                {
+                    title: 'My journey with 2',
+                    content: '22',
+                    id: 2
+                }
+            ],
+            postFontSize: 1
+        },
+        methods: {
+            onEnglargeText (event){
+                this.postFontSize += event
+            }
+        }
     });
 </script>
 </body>

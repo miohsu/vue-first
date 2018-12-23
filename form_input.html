@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="message" placeholder="edit me">
+    <p>Message is: {{ message }}</p>
+    <br>
+    <span>Multiline message is:</span>
+    <p style="white-space: pre-line">{{ mulmsg }}</p>
+    <textarea v-model="mulmsg" name="" id="" cols="30" rows="3"></textarea>
+    <br>
+    <input type="checkbox" id="checkbox" v-model="checked">
+    <label for="checkbox">{{ checked }}</label>
+    <br>
+    <div id="checkbox-example">
+        <input type="checkbox" id="mio" value="Mio" v-model="checkedNames">
+        <label for="mio">Mio</label>
+        <input type="checkbox" id="los" value="Los" v-model="checkedNames">
+        <label for="mio">Los</label>
+        <input type="checkbox" id="tom" value="Tom" v-model="checkedNames">
+        <label for="mio">Tom</label>
+        <span>Checked names: {{ checkedNames }}</span>
+    </div>
+    <br>
+    <div id="radio-example">
+        <input type="radio" id="1" value="One" v-model="picked">
+        <label for="1">One</label>
+        <input type="radio" id="2" value="Two" v-model="picked">
+        <label for="2">Two</label>
+        <span>Picked: {{ picked }}</span>
+    </div>
+    <br>
+    <div id="selected-example">
+        <select v-model="selected">
+            <option value="" disabled>请选择</option>
+            <option v-for="(option,index) in options" :value="index">{{option}}</option>
+        </select>
+        <span>Selected: {{ selected }}</span>
+    </div>
+    <br>
+    <div id="select-multi">
+        <select v-model="selecteds" multiple style="width: 50px;">
+            <option value="a">A</option>
+            <option value="b">B</option>
+            <option value="c">C</option>
+            <option value="d">D</option>
+        </select>
+        <span>Selected: {{ selecteds }}</span>
+    </div>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: '',
+            mulmsg: '',
+            checked: null,
+            checkedNames: [],
+            picked: null,
+            selected: '',
+            selecteds: [],
+            options: ['A','B','C']
+        }
+    })
+</script>
+</body>
+</html>

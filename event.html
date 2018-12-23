@@ -13,6 +13,8 @@
     <button @click="greet">Greet</button>
     <button @click="say('hi')">Say hi</button>
     <button @click="say('what')">Say what</button>
+    <button @click="warn('Form cannot be submitted yet.',$event)">submit</button>
+    <input type="text" @keyup.enter="submit" v-model="submsg">
 </div>
 <script>
     var vm = new Vue({
@@ -20,6 +22,7 @@
         data: {
             counter: 0,
             name: 'Vue.js',
+            submsg: '',
         },
         methods: {
             greet (){
@@ -27,6 +30,16 @@
             },
             say (msg){
                 alert(msg)
+            },
+            warn (msg,event){
+                if (event) {
+                    event.preventDefault()
+                    alert(msg)
+                }
+            },
+            submit (){
+                alert(this.submsg)
+                this.submsg = ''
             }
         }
     })
